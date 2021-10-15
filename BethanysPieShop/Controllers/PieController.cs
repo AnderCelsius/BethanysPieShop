@@ -1,6 +1,7 @@
 ﻿using BethanysPieShop.Models;
 using BethanysPieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace BethanysPieShop.Controllers
 {
@@ -24,9 +25,9 @@ namespace BethanysPieShop.Controllers
             return View(pieListViewModel);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var pie = _pieRepository.GetPieById(id);
+            var pie = await _pieRepository.GetPieById(id);
             if (pie == null)
                 return NotFound();
             return View(pie);

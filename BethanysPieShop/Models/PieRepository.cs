@@ -29,9 +29,9 @@ namespace BethanysPieShop.Models
             }
         }
 
-        public Pie GetPieById(int pieId)
+        public async Task<Pie> GetPieById(int pieId)
         {
-            return _context.Pies.FirstOrDefault(p => p.PieId == pieId);
+            return await _context.Pies.FirstOrDefaultAsync(p => p.PieId == pieId);
         }
     }
 }

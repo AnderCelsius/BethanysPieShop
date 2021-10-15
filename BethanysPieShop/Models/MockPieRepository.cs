@@ -18,9 +18,14 @@ namespace BethanysPieShop.Models
 
         public IEnumerable<Pie> PiesOfTheWeek { get; }
 
-        public Pie GetPieById(int pieId)
+        public Task<Pie> GetPieById(int pieId)
         {
-            return AllPies.FirstOrDefault(p => p.PieId == pieId);
+            throw new System.NotImplementedException();
         }
+
+        //public Pie GetPieById(int pieId)
+        //{
+        //    return AllPies.FirstOrDefault(p => p.PieId == pieId);
+        //}
     }
 }
