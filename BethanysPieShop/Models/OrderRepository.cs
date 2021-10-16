@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BethanysPieShop.Models
 {
@@ -15,9 +16,12 @@ namespace BethanysPieShop.Models
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
-            _context.Orders.Add(order);
             
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+            order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
+
+            order.OrderDetails = new List<OrderDetail>();
+            //adding the order with its details
 
             foreach(var shoppingCartItem in shoppingCartItems)
             {
@@ -25,13 +29,12 @@ namespace BethanysPieShop.Models
                 {
                     Amount = shoppingCartItem.Amount,
                     PieId = shoppingCartItem.Pie.PieId,
-                    OrderId = order.OrderId,
                     Price = shoppingCartItem.Pie.Price
                 };
 
-                _context.OrderDetails.Add(orderDetail);
+                order.OrderDetails.Add(orderDetail);
             }
-
+            _context.Orders.Add(order);
             _context.SaveChanges();
         }
     }
